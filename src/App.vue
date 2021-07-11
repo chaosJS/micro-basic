@@ -1,11 +1,18 @@
 <template>
-	<div id="app">
-		<div id="nav">
-			<router-link to="/">Home</router-link> |
-			<router-link to="/about">About</router-link>
-		</div>
-		<router-view />
-	</div>
+	<a-config-provider prefixCls="cns">
+		<section id="cns-main-app">
+			<section class="cns-menu-wrapper">
+				<main-menu :menus="menus" />
+			</section>
+			<section class="cns-frame-wrapper">
+				<!-- 主应用渲染区，用于挂载主应用路由触发的组件 -->
+				<router-view v-show="$route.name" />
+
+				<!-- 子应用渲染区，用于挂载子应用节点 -->
+				<section v-show="!$route.name" id="frame"></section>
+			</section>
+		</section>
+	</a-config-provider>
 </template>
 
 <script lang="ts">
